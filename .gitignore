@@ -7,3 +7,6 @@ desktop.ini
 
 # 어드민은 hoo-gangnam-admin 폴더에 따로 있습니다 (공개 사이트에 두지 않음)
 admin.html
+
+# 사진 원본 보관 (용량이 커서 사이트에는 올리지 않음)
+assets/images/_original/
