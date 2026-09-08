@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+  <rect width="600" height="600" fill="#eeece5"/>
+  <rect x="0" y="0" width="600" height="6" fill="#b79e6c"/>
+  <g font-family="sans-serif" text-anchor="middle">
+    <text x="300" y="292" font-size="33" fill="#0d0d0d" font-weight="700">강남 사례2 치료 후</text>
+    <text x="300" y="323" font-size="20" fill="#0d0d0d" opacity="0.55">case2-after.svg 교체</text>
+  </g>
+  <g stroke="#0d0d0d" opacity="0.15">
+    <line x1="0" y1="0" x2="600" y2="600"/>
+    <line x1="600" y1="0" x2="0" y2="600"/>
+  </g>
+</svg>

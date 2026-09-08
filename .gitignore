@@ -1,0 +1,9 @@
+# OS / 편집기
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+
+
+# 어드민은 hoo-gangnam-admin 폴더에 따로 있습니다 (공개 사이트에 두지 않음)
+admin.html
