@@ -79,8 +79,18 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "MedicalClinic",
+      "@type": "WebSite",
+      "@id": "https://gnhoowart.co.kr/#website",
+      "url": "https://gnhoowart.co.kr/",
       "name": "후한의원 강남점",
+      "inLanguage": "ko-KR",
+      "publisher": { "@id": "https://gnhoowart.co.kr/#clinic" }
+    },
+    {
+      "@type": "MedicalClinic",
+      "@id": "https://gnhoowart.co.kr/#clinic",
+      "name": "후한의원 강남점",
+      "description": "서울 강남구 도산대로에 위치한 후한의원 강남점은 사율침과 줌 핸드피스 CO2레이저(코트라 플러스), 엔디야그 레이저를 병행해 편평사마귀·쥐젖·비립종·한관종 등 피부 병변을 제거하고 재발까지 관리하는 한의원입니다.",
       "url": "https://gnhoowart.co.kr/",
       "image": "https://gnhoowart.co.kr/assets/images/hero-main.jpg",
       "telephone": "02-543-9696",
@@ -91,8 +101,26 @@
         "streetAddress": "도산대로 110 KBL센터 지하 1층",
         "addressLocality": "강남구",
         "addressRegion": "서울특별시",
+        "postalCode": "06039",
         "addressCountry": "KR"
       },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 37.516282,
+        "longitude": 127.0210497
+      },
+      "hasMap": "https://map.naver.com/p/search/%ED%9B%84%ED%95%9C%EC%9D%98%EC%9B%90%20%EA%B0%95%EB%82%A8%EC%A0%90",
+      "areaServed": [
+        { "@type": "AdministrativeArea", "name": "서울특별시 강남구" },
+        { "@type": "AdministrativeArea", "name": "서울특별시 서초구" },
+        { "@type": "AdministrativeArea", "name": "서울특별시 송파구" }
+      ],
+      "sameAs": [
+        "https://pf.kakao.com/_LYNVu",
+        "https://www.instagram.com/hooclinic0/",
+        "https://www.youtube.com/channel/UCKQgNhNEx7L9aCfCsxRGwBQ",
+        "https://www.hooclinic.co.kr/index.php/branch/gangnam"
+      ],
       "openingHoursSpecification": [
         {
           "@type": "OpeningHoursSpecification",
@@ -279,7 +307,7 @@
       </div>
     </div>
     <div class="relative">
-      <img src="assets/images/hero-main.jpg" alt="후한의원 강남점 편평사마귀 클리닉" class="w-full rounded-2xl shadow-soft object-cover aspect-square">
+      <img src="assets/images/hero-main.jpg" alt="후한의원 강남점 편평사마귀 클리닉" class="w-full rounded-2xl shadow-soft object-cover aspect-square" width="1080" height="1080" fetchpriority="high" decoding="async">
     </div>
   </div>
 </section>
@@ -371,7 +399,7 @@
     <div class="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
       <div class="rounded-2xl bg-white text-point p-7 flex flex-col">
-        <img src="assets/images/treatment-needle.jpg" alt="사율침 치료" class="w-full rounded-xl mb-6 aspect-square object-cover">
+        <img src="assets/images/treatment-needle.jpg" alt="사율침 치료" class="w-full rounded-xl mb-6 aspect-square object-cover" width="933" height="1400" loading="lazy" decoding="async">
         <p class="text-gold font-bold text-sm tracking-wide">A. NEEDLE THERAPY</p>
         <h3 class="text-xl font-bold mt-1">사율침 치료</h3>
         <ul class="mt-4 space-y-2.5 text-sm text-muted">
@@ -383,7 +411,7 @@
       </div>
 
       <div class="rounded-2xl bg-point-soft p-7 border border-white/10 flex flex-col">
-        <img src="assets/images/treatment-laser.png" alt="줌 핸드피스 CO2레이저 코트라 플러스" class="w-full rounded-xl mb-6 aspect-square object-cover">
+        <img src="assets/images/treatment-laser.png" alt="줌 핸드피스 CO2레이저 코트라 플러스" class="w-full rounded-xl mb-6 aspect-square object-cover" width="966" height="966" loading="lazy" decoding="async">
         <p class="text-gold font-bold text-sm tracking-wide">B. CO2 LASER</p>
         <h3 class="text-xl font-bold mt-1">줌 핸드피스 CO2레이저<br><span class="text-base font-semibold text-white/80">(코트라 플러스)</span></h3>
         <ul class="mt-4 space-y-2.5 text-sm text-white/80">
@@ -395,7 +423,7 @@
       </div>
 
       <div class="rounded-2xl bg-point-soft p-7 border border-white/10 flex flex-col md:col-span-2 lg:col-span-1">
-        <img src="assets/images/treatment-ndyag.jpg" alt="엔디야그 레이저" class="w-full rounded-xl mb-6 aspect-square object-cover">
+        <img src="assets/images/treatment-ndyag.jpg" alt="엔디야그 레이저" class="w-full rounded-xl mb-6 aspect-square object-cover" width="1042" height="700" loading="lazy" decoding="async">
         <p class="text-gold font-bold text-sm tracking-wide">C. ND:YAG LASER</p>
         <h3 class="text-xl font-bold mt-1">엔디야그 레이저<br><span class="text-base font-semibold text-white/80">(제네시스 모드 + 멀티펄스 토닝 모드)</span></h3>
         <ul class="mt-4 space-y-2.5 text-sm text-white/80">
@@ -618,8 +646,8 @@
     <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
       <article class="case-card rounded-2xl border border-line overflow-hidden" data-part="목">
         <div class="grid grid-cols-2">
-          <img src="assets/images/case1-before.jpg" alt="목 편평사마귀 치료 전" class="aspect-square object-cover">
-          <img src="assets/images/case1-after.jpg" alt="목 편평사마귀 치료 후" class="aspect-square object-cover">
+          <img src="assets/images/case1-before.jpg" alt="목 편평사마귀 치료 전" class="aspect-square object-cover" width="392" height="308" loading="lazy" decoding="async">
+          <img src="assets/images/case1-after.jpg" alt="목 편평사마귀 치료 후" class="aspect-square object-cover" width="392" height="308" loading="lazy" decoding="async">
         </div>
         <div class="p-4">
           <p class="text-xs text-gold font-bold">목 · 18일</p>
@@ -629,8 +657,8 @@
       </article>
       <article class="case-card rounded-2xl border border-line overflow-hidden" data-part="이마">
         <div class="grid grid-cols-2">
-          <img src="assets/images/case2-before.jpg" alt="이마 편평사마귀 치료 전" class="aspect-square object-cover">
-          <img src="assets/images/case2-after.jpg" alt="이마 편평사마귀 치료 후" class="aspect-square object-cover">
+          <img src="assets/images/case2-before.jpg" alt="이마 편평사마귀 치료 전" class="aspect-square object-cover" width="392" height="308" loading="lazy" decoding="async">
+          <img src="assets/images/case2-after.jpg" alt="이마 편평사마귀 치료 후" class="aspect-square object-cover" width="392" height="308" loading="lazy" decoding="async">
         </div>
         <div class="p-4">
           <p class="text-xs text-gold font-bold">이마 · 약 2개월</p>
@@ -640,8 +668,8 @@
       </article>
       <article class="case-card rounded-2xl border border-line overflow-hidden" data-part="헤어라인">
         <div class="grid grid-cols-2">
-          <img src="assets/images/case3-before.jpg" alt="헤어라인 편평사마귀 치료 전" class="aspect-square object-cover">
-          <img src="assets/images/case3-after.jpg" alt="헤어라인 편평사마귀 치료 후" class="aspect-square object-cover">
+          <img src="assets/images/case3-before.jpg" alt="헤어라인 편평사마귀 치료 전" class="aspect-square object-cover" width="392" height="308" loading="lazy" decoding="async">
+          <img src="assets/images/case3-after.jpg" alt="헤어라인 편평사마귀 치료 후" class="aspect-square object-cover" width="392" height="308" loading="lazy" decoding="async">
         </div>
         <div class="p-4">
           <p class="text-xs text-gold font-bold">헤어라인 · 사율침+레이저</p>
@@ -651,8 +679,8 @@
       </article>
       <article class="case-card rounded-2xl border border-line overflow-hidden" data-part="볼">
         <div class="grid grid-cols-2">
-          <img src="assets/images/case4-before.jpg" alt="볼 편평사마귀 치료 전" class="aspect-square object-cover">
-          <img src="assets/images/case4-after.jpg" alt="볼 편평사마귀 치료 후" class="aspect-square object-cover">
+          <img src="assets/images/case4-before.jpg" alt="볼 편평사마귀 치료 전" class="aspect-square object-cover" width="392" height="308" loading="lazy" decoding="async">
+          <img src="assets/images/case4-after.jpg" alt="볼 편평사마귀 치료 후" class="aspect-square object-cover" width="392" height="308" loading="lazy" decoding="async">
         </div>
         <div class="p-4">
           <p class="text-xs text-gold font-bold">볼 · 20일</p>
@@ -682,7 +710,7 @@
   <div class="max-w-6xl mx-auto px-6 mt-12">
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <article class="bg-white rounded-2xl overflow-hidden shadow-soft border border-line flex flex-col">
-        <img src="assets/images/doctor-hong.jpg" alt="홍진우 대표원장" class="w-full object-cover aspect-[7/9]">
+        <img src="assets/images/doctor-hong.jpg" alt="홍진우 대표원장" class="w-full object-cover aspect-[7/9]" width="707" height="1027" loading="lazy" decoding="async">
         <div class="p-6 flex-1 flex flex-col">
           <div class="flex items-center gap-2 flex-wrap">
             <h3 class="text-xl font-bold">홍진우</h3>
@@ -697,7 +725,7 @@
         </div>
       </article>
       <article class="bg-white rounded-2xl overflow-hidden shadow-soft border border-line flex flex-col">
-        <img src="assets/images/doctor-min.jpg" alt="민수연 대표원장" class="w-full object-cover aspect-[7/9]">
+        <img src="assets/images/doctor-min.jpg" alt="민수연 대표원장" class="w-full object-cover aspect-[7/9]" width="789" height="1100" loading="lazy" decoding="async">
         <div class="p-6 flex-1 flex flex-col">
           <div class="flex items-center gap-2 flex-wrap">
             <h3 class="text-xl font-bold">민수연</h3>
@@ -710,7 +738,7 @@
         </div>
       </article>
       <article class="bg-white rounded-2xl overflow-hidden shadow-soft border border-line flex flex-col">
-        <img src="assets/images/doctor-jung.jpg" alt="정유한 대표원장" class="w-full object-cover aspect-[7/9]">
+        <img src="assets/images/doctor-jung.jpg" alt="정유한 대표원장" class="w-full object-cover aspect-[7/9]" width="733" height="1100" loading="lazy" decoding="async">
         <div class="p-6 flex-1 flex flex-col">
           <div class="flex items-center gap-2 flex-wrap">
             <h3 class="text-xl font-bold">정유한</h3>
@@ -723,7 +751,7 @@
         </div>
       </article>
       <article class="bg-white rounded-2xl overflow-hidden shadow-soft border border-line flex flex-col">
-        <img src="assets/images/doctor-oh.jpg" alt="오경진 대표원장" class="w-full object-cover aspect-[7/9]">
+        <img src="assets/images/doctor-oh.jpg" alt="오경진 대표원장" class="w-full object-cover aspect-[7/9]" width="826" height="1100" loading="lazy" decoding="async">
         <div class="p-6 flex-1 flex flex-col">
           <div class="flex items-center gap-2 flex-wrap">
             <h3 class="text-xl font-bold">오경진</h3>
@@ -735,7 +763,7 @@
         </div>
       </article>
       <article class="bg-white rounded-2xl overflow-hidden shadow-soft border border-line flex flex-col">
-        <img src="assets/images/doctor-kang.jpg" alt="강소진 대표원장" class="w-full object-cover aspect-[7/9]">
+        <img src="assets/images/doctor-kang.jpg" alt="강소진 대표원장" class="w-full object-cover aspect-[7/9]" width="941" height="1100" loading="lazy" decoding="async">
         <div class="p-6 flex-1 flex flex-col">
           <div class="flex items-center gap-2 flex-wrap">
             <h3 class="text-xl font-bold">강소진</h3>
@@ -834,7 +862,7 @@
         <h3 class="text-xl font-bold">진료 및 방문 안내</h3>
         <div class="mt-4 space-y-1 text-sm">
           <p><span class="text-muted">지점명</span> &nbsp; 후한의원 강남점</p>
-          <p><span class="text-muted">대표원장</span> &nbsp; 홍진우 · 민수연 · 정유한 · 오경진 · 강소진</p>
+          <p><span class="text-muted">대표</span> &nbsp; 홍진우</p>
           <p><span class="text-muted">주소</span> &nbsp; 서울특별시 강남구 도산대로 110 KBL센터 지하 1층</p>
           <p><span class="text-muted">사업자등록번호</span> &nbsp; 496-26-01423</p>
           <p><span class="text-muted">전화</span> &nbsp; <a href="tel:02-543-9696" class="font-bold text-gold">02-543-9696</a></p>
