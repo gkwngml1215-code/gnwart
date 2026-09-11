@@ -1,6 +1,6 @@
-// 관리 도구 v2 실제 화면 검증 (크롬을 화면 없이 띄워 버튼을 직접 누릅니다)
+// 관리 도구 v2.1 실제 화면 검증 (크롬을 화면 없이 띄워 버튼을 직접 누릅니다)
 // GitHub 는 가짜(메모리 저장소)로 바꿔 끼우므로 실제 홈페이지는 건드리지 않습니다.
-// 저장소 이름·글 개수·파일명은 columns-core.js 설정과 홈페이지 저장소에서 읽어 오므로 지점과 상관없이 쓸 수 있습니다.
+// 지점 값(저장소·키 이름)은 site-config.js 에서 읽으므로 전주점·강남점이 같은 파일을 씁니다.
 //
 // 실행: node tests/e2e-admin.js <홈페이지 저장소 폴더> <chrome.exe 경로> <임시 프로필 폴더>
 const http = require('http');
@@ -15,9 +15,9 @@ const [SITE_DIR, CHROME, PROFILE] = process.argv.slice(2);
 const PORT = 8765, DEBUG_PORT = 9333;
 const REPO_PATH = `/repos/${C.SITE.github.owner}/${C.SITE.github.repo}`;
 const API = 'https://api.github.com' + REPO_PATH;
-const INDEX_HTML = fs.readFileSync(path.join(ADMIN, 'index.html'), 'utf8');
-const TOKEN_KEY = C.SITE.tokenKey || (/GH_TOKEN_KEY = '([^']+)'/.exec(fs.readFileSync(path.join(ADMIN, 'github-publish.js'), 'utf8')) || [])[1];
-const LEGACY_KEY = /LEGACY_STATE_KEY = '([^']+)'/.exec(INDEX_HTML)[1];
+const TOKEN_KEY = C.SITE.tokenKey;
+const LEGACY_KEY = C.SITE.storagePrefix + '_admin_state_v1';
+const DRAFT_PREFIX = C.SITE.storagePrefix + '_admin_draft_v2:';
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 /* ---------- 홈페이지 저장소 내용 (git 에 올라간 파일 기준) ---------- */
@@ -32,13 +32,14 @@ function siteFiles(){
 /* ---------- 가짜 GitHub API (페이지보다 먼저 실행되어 fetch 를 바꿔 끼운다) ---------- */
 function mockSource(files, seed){
   return `(() => {
+  if (window.top !== window) return;   // 미리보기 iframe(잠긴 창) 안에서는 실행하지 않는다
   localStorage.setItem(${JSON.stringify(TOKEN_KEY)}, 'test-token');
   ${Object.entries(seed || {}).map(([k, v]) => `localStorage.setItem(${JSON.stringify(k)}, ${JSON.stringify(JSON.stringify(v))});`).join('\n')}
   const API = ${JSON.stringify(API)};
   const REPO_PATH = ${JSON.stringify(REPO_PATH)};
   const enc = s => { const b = new TextEncoder().encode(s); let bin = ''; for (const x of b) bin += String.fromCharCode(x); return btoa(bin); };
   const hash = s => { let h = 5381; for (let i = 0; i < s.length; i++) h = ((h * 33) ^ s.charCodeAt(i)) >>> 0; return 'b' + h.toString(16) + '-' + s.length; };
-  const R = {trees: {}, commits: {}, blobs: {}, head: null, n: 0, raceOnce: false, other: []};
+  const R = {trees: {}, commits: {}, blobs: {}, head: null, n: 0, raceOnce: false, dropAfterPatch: false, other: [], patches: 0};
   const putTree = f => { const id = 't' + (R.n++); R.trees[id] = f; Object.values(f).forEach(c => { R.blobs[hash(c)] = c; }); return id; };
   const putCommit = (tree, parent, message) => { const id = 'c' + (R.n++); R.commits[id] = {tree, parent, message}; return id; };
   R.head = putCommit(putTree(${JSON.stringify(files)}), null, 'init');
@@ -70,9 +71,11 @@ function mockSource(files, seed){
     }
     if (p === '/git/commits' && method === 'POST') return json(201, {sha: putCommit(body.tree, body.parents[0], body.message)});
     if (p === '/git/refs/heads/main' && method === 'PATCH') {
+      R.patches++;
       if (R.raceOnce) { R.raceOnce = false; R.external(); }   // 확인하는 사이 다른 곳에서 발행된 상황
       if (body.force || R.commits[body.sha].parent !== R.head) return json(422, {message: 'Update is not a fast forward'});
       R.head = body.sha;
+      if (R.dropAfterPatch) { R.dropAfterPatch = false; throw new TypeError('Failed to fetch'); }   // 올라간 뒤 응답을 못 받은 상황
       return json(200, {object: {sha: R.head}});
     }
     if (p === '/contents/assets/images') return json(200, Object.keys(R.files()).filter(k => k.startsWith('assets/images/')).map(k => ({type: 'file', name: k.slice(14)})));
@@ -93,11 +96,12 @@ function send(method, params, sessionId){
   });
 }
 
-async function openBrowser(files, seed){
-  const {browserContextId} = await send('Target.createBrowserContext');   // 매번 새 시크릿 창과 같다
+// ctx 를 주면 같은 브라우저 창(같은 저장 공간)에 탭을 하나 더 연다
+async function openBrowser(files, seed, ctx){
+  const browserContextId = ctx || (await send('Target.createBrowserContext')).browserContextId;   // 새 시크릿 창과 같다
   const {targetId} = await send('Target.createTarget', {url: 'about:blank', browserContextId});
   const {sessionId} = await send('Target.attachToTarget', {targetId, flatten: true});
-  const s = {dialogs: [], errors: []};
+  const s = {dialogs: [], errors: [], ctx: browserContextId};
   listeners.push(msg => {
     if (msg.sessionId !== sessionId) return;
     if (msg.method === 'Page.javascriptDialogOpening') {
@@ -136,6 +140,7 @@ async function openBrowser(files, seed){
     return el.value;
   })()`);
   s.select = key => s.eval(`(() => { const el = document.getElementById('columnSelect'); el.value = ${JSON.stringify(key)}; el.dispatchEvent(new Event('change')); return el.value; })()`);
+  s.options = () => s.eval(`Array.from(document.querySelectorAll('#columnSelect option')).map(o => o.textContent)`);
   s.modalText = () => s.eval(`document.getElementById('modalRoot').innerText`);
   s.waitModal = () => s.until(`!!document.querySelector('#modalRoot [data-act="ok"]')`, '발행 전 확인 화면');
   s.untilDialog = async re => {
@@ -147,8 +152,17 @@ async function openBrowser(files, seed){
     throw new Error('알림창을 기다리다 시간 초과: ' + re + ' / 받은 알림: ' + JSON.stringify(s.dialogs));
   };
   s.repo = async () => JSON.parse(await s.eval('JSON.stringify(window.__repo.files())'));
+  s.patches = () => s.eval('window.__repo.patches');
   s.otherRepoCalls = () => s.eval('window.__repo.other.length');
   s.ready = () => s.until(`/컬럼 \\d+개/.test(document.getElementById('deployedState').textContent)`, '홈페이지 목록 불러오기');
+  // 글을 고르고, 그 글의 입력칸이 뜰 때까지 기다린다 (제목은 앞 단계에서 바뀌었을 수 있어 파일명으로 확인)
+  s.loadPost = post => s.select('slug:' + post.slug).then(() => s.until(`(document.querySelector('#columnFields [data-field="slug"]') || {}).value === ${JSON.stringify(post.slug)} && !!document.querySelector('#columnFields [data-field="title"]')`, post.slug + ' 불러오기'));
+  s.reload = async () => {
+    try { await s.eval('window.__oldPage = true; location.reload(); true'); } catch (e) { /* 새로고침 중 */ }
+    await s.until('!window.__oldPage', '새로고침');   // 새 문서에는 표시가 없다
+    await s.ready();
+  };
+  s.closeTab = () => send('Target.closeTarget', {targetId});
   s.close = () => send('Target.disposeBrowserContext', {browserContextId});
   return s;
 }
@@ -159,6 +173,7 @@ const indexSlugs = files => index(files).map(c => c.slug);
 const cardSlugs = files => [...files['columns.html'].matchAll(/href="columns\/([^"]+)\.html"/g)].map(m => m[1]);
 const sitemapSlugs = files => [...files['sitemap.xml'].matchAll(/\/columns\/([^/<]+)\.html</g)].map(m => m[1]);
 const pagesOf = files => Object.keys(files).filter(p => /^columns\/[^/]+\.html$/.test(p));
+const VALID_BODY = '<p>테스트 본문 첫 문단</p>\n<h2>소제목</h2>\n<p>둘째 문단</p>';
 
 let failed = 0;
 async function step(name, fn){
@@ -201,9 +216,11 @@ async function step(name, fn){
   const taken = C.collectSlugs(Object.keys(initial), start);
   const next1 = C.nextSlug(taken); taken.add(next1);
   const next2 = C.nextSlug(taken);
-  const collide = startSlugs[3], editTarget = start[3], raceTarget = start[4];
+  const collide = startSlugs[3], editTarget = start[3], raceTarget = start[4], tabTarget = start[1];
   let files = initial;
-  console.log(`\n[${C.SITE.bizName}] 시작 상태: 컬럼 ${N}개 (${startSlugs.join(', ')}) · 저장소 ${C.SITE.github.repo}\n`);
+  console.log(`\n[${C.SITE.bizName} · ${C.VERSION}] 시작 상태: 컬럼 ${N}개 (${startSlugs.join(', ')}) · 저장소 ${C.SITE.github.repo}\n`);
+
+  console.log('— 발행 규칙 —');
 
   await step(`새 브라우저에서 새 글 발행: 파일명 ${next1}, 기존 ${N}개 유지, 확인 화면 ${N + 1}개 표시`, async () => {
     const b = await openBrowser(files);
@@ -213,7 +230,8 @@ async function step(name, fn){
     await b.field('title', '테스트 새 글');
     await b.field('cardSummary', '테스트 요약');
     await b.field('description', '테스트 설명');
-    await b.field('body', '<p>테스트 본문 첫 문단</p>\n<h2>소제목</h2>\n<p>둘째 문단</p>');
+    await b.field('body', VALID_BODY);
+    assert.match(await b.eval(`document.getElementById('bodyCheck').textContent`), /이상 없음/);
     await b.click('#barPublishBtn');
     await b.waitModal();
     const text = await b.modalText();
@@ -266,8 +284,7 @@ async function step(name, fn){
   await step(`기존 글(${editTarget.slug}) 수정: 수정 1 · 유지 ${N + 1}, 다른 글 페이지는 그대로`, async () => {
     const b = await openBrowser(files);
     await b.ready();
-    await b.select('slug:' + editTarget.slug);
-    await b.until(`(document.querySelector('#columnFields [data-field="title"]') || {}).value === ${JSON.stringify(editTarget.title)}`, editTarget.slug + ' 불러오기');
+    await b.loadPost(editTarget);
     assert.strictEqual(await b.eval(`document.querySelector('#columnFields [data-field="slug"]').readOnly`), true);
     await b.field('title', editTarget.title + ' (수정됨)');
     await b.click('#barPublishBtn');
@@ -288,8 +305,7 @@ async function step(name, fn){
   await step('동시 발행: 확인 중 다른 곳에서 발행되면 거절되고, 최신본 기준으로 다시 확인받은 뒤 둘 다 남는다', async () => {
     const b = await openBrowser(files);
     await b.ready();
-    await b.select('slug:' + raceTarget.slug);
-    await b.until(`(document.querySelector('#columnFields [data-field="title"]') || {}).value === ${JSON.stringify(raceTarget.title)}`, raceTarget.slug + ' 불러오기');
+    await b.loadPost(raceTarget);
     await b.field('cardSummary', '동시 발행 테스트 요약');
     await b.click('#barPublishBtn');
     await b.waitModal();
@@ -338,6 +354,132 @@ async function step(name, fn){
     assert.ok(!(C.PATHS.page(next2) in files) && !(C.PATHS.data(next2) in files));
     assert.deepStrictEqual(indexSlugs(files), startSlugs.concat(next1));
     assert.deepStrictEqual(cardSlugs(files), indexSlugs(files));
+    await b.close();
+  });
+
+  console.log('\n— v2.1 보강 —');
+
+  await step('올린 직후 연결이 끊겨도 결과를 확인해 "발행 완료"로 처리하고, 같은 글이 두 번 올라가지 않는다', async () => {
+    const b = await openBrowser(files);
+    await b.ready();
+    await b.loadPost(editTarget);
+    await b.field('cardSummary', '연결 끊김 테스트 요약');
+    await b.click('#barPublishBtn');
+    await b.waitModal();
+    await b.eval('window.__repo.dropAfterPatch = true');
+    await b.click('#modalRoot [data-act="ok"]');
+    await b.untilDialog(/발행이 끝났습니다/);
+    files = await b.repo();
+    assert.strictEqual(await b.patches(), 1, '한 번만 올라가야 함');
+    assert.strictEqual(index(files).find(c => c.slug === editTarget.slug).cardSummary, '연결 끊김 테스트 요약');
+    assert.strictEqual(indexSlugs(files).length, N + 1);
+    assert.strictEqual(await b.eval(`document.getElementById('draftBar').classList.contains('hidden')`), true, '임시저장본이 정리되어야 함');
+    await b.close();
+  });
+
+  await step('이미 있는 글과 같은 제목의 새 글 → 체크해야만 [발행하기]가 열린다', async () => {
+    const b = await openBrowser(files);
+    await b.ready();
+    await b.click('#addColumnBtn');
+    await b.field('title', start[0].title);
+    await b.field('body', '<p>본문</p>');
+    await b.click('#barPublishBtn');
+    await b.waitModal();
+    assert.match(await b.modalText(), /같은 제목의 글이 이미 홈페이지에 있습니다/);
+    assert.strictEqual(await b.eval(`document.querySelector('#modalRoot [data-act="ok"]').disabled`), true);
+    await b.eval(`(() => { const a = document.querySelector('#modalRoot .ack'); a.checked = true; a.dispatchEvent(new Event('change')); return true; })()`);
+    assert.strictEqual(await b.eval(`document.querySelector('#modalRoot [data-act="ok"]').disabled`), false);
+    await b.click('#modalRoot [data-act="cancel"]');
+    assert.deepStrictEqual(await b.repo(), files);
+    await b.close();
+  });
+
+  await step('홈페이지에 없는 사진 경로 → 확인 화면 전에 막히고 어떤 사진인지 알려 준다', async () => {
+    const b = await openBrowser(files);
+    await b.ready();
+    await b.click('#addColumnBtn');
+    await b.field('title', '사진 없는 글');
+    await b.field('body', '<p>본문</p>');
+    await b.field('image', 'assets/images/nope-photo.jpg');
+    await b.click('#barPublishBtn');
+    await b.untilDialog(/홈페이지에 없는 사진[\s\S]*nope-photo\.jpg/);
+    assert.strictEqual(await b.eval(`!!document.querySelector('#modalRoot [data-act="ok"]')`), false);
+    assert.deepStrictEqual(await b.repo(), files);
+    await b.close();
+  });
+
+  await step('[본문 자동 정리]: 메모장 글·마크다운 → 문단/소제목/목록 HTML, 검사 통과. 깨진 본문은 발행 전에 막힘', async () => {
+    const b = await openBrowser(files);
+    await b.ready();
+    await b.click('#addColumnBtn');
+    await b.field('title', '정리 테스트');
+    await b.field('body', '```html\n안녕하세요.\n둘째 줄\n\n## 왜 생길까요\n- 하나\n- 둘\n```');
+    assert.match(await b.eval(`document.getElementById('bodyCheck').textContent`), /```/);
+    await b.click('#tidyBodyBtn');
+    const body = await b.fieldValue('body');
+    assert.ok(body.includes('<h2>왜 생길까요</h2>') && body.includes('<ul>') && body.includes('<p>안녕하세요.<br>'), '정리된 본문: ' + body);
+    assert.ok(!body.includes('```'));
+    assert.match(await b.eval(`document.getElementById('bodyCheck').textContent`), /이상 없음/);
+    await b.field('body', '<p>글</p></div>');
+    assert.match(await b.eval(`document.getElementById('bodyCheck').textContent`), /여는 태그 없이/);
+    await b.click('#barPublishBtn');
+    await b.untilDialog(/여는 태그 없이/);
+    assert.strictEqual(await b.eval(`!!document.querySelector('#modalRoot [data-act="ok"]')`), false);
+    await b.close();
+  });
+
+  await step('빈 새 글은 임시저장되지 않는다 ([+ 새 컬럼]만 누르고 새로고침 → 목록에 남지 않음)', async () => {
+    const b = await openBrowser(files);
+    await b.ready();
+    await b.click('#addColumnBtn');
+    await b.click('#addColumnBtn');
+    assert.strictEqual(await b.eval(`Object.keys(localStorage).filter(k => k.indexOf(${JSON.stringify(DRAFT_PREFIX)}) === 0).length`), 0);
+    await b.reload();
+    const opts = await b.options();
+    // 임시저장 항목은 "새 글 · …" 로 표시된다 (발행된 글 제목에 "새 글"이 들어가도 무관)
+    assert.ok(!opts.some(t => /^새 글 ·/.test(t)), '빈 새 글이 목록에 남아 있음: ' + JSON.stringify(opts) +
+      ' / 저장 키: ' + JSON.stringify(await b.eval('Object.keys(localStorage)')));
+    await b.click('#addColumnBtn');
+    await b.field('title', '제목만 쓴 글');
+    await b.reload();
+    assert.ok((await b.options()).some(t => /새 글 · 제목만 쓴 글/.test(t)), '쓰던 새 글은 남아야 함');
+    await b.close();
+  });
+
+  await step('탭 두 개: 각 탭의 임시저장본이 서로를 덮어쓰지 않고, 같은 글을 고치면 알려 준다', async () => {
+    const a = await openBrowser(files);
+    await a.ready();
+    await a.loadPost(tabTarget);
+    await a.field('title', tabTarget.title + ' (A탭)');
+    const b = await openBrowser(files, null, a.ctx);   // 같은 브라우저의 두 번째 탭
+    await b.ready();
+    assert.ok((await b.options()).some(t => t.includes(tabTarget.title) && t.includes('고친 내용 있음')), 'B탭에 A탭의 임시저장 표시가 보여야 함');
+    await b.loadPost(editTarget);
+    await b.field('title', editTarget.title + ' (B탭)');
+    await sleep(300);
+    const keys = await a.eval(`Object.keys(localStorage).filter(k => k.indexOf(${JSON.stringify(DRAFT_PREFIX)}) === 0).sort()`);
+    assert.deepStrictEqual(keys, [DRAFT_PREFIX + 'slug:' + editTarget.slug, DRAFT_PREFIX + 'slug:' + tabTarget.slug].sort(), '두 글의 임시저장본이 모두 남아야 함');
+    assert.strictEqual(await a.fieldValue('title'), tabTarget.title + ' (A탭)', 'A탭 내용이 그대로여야 함');
+    // 같은 글을 B탭에서도 고치면 A탭에 알림
+    await b.loadPost({slug: tabTarget.slug, title: tabTarget.title + ' (A탭)'});
+    await b.field('title', tabTarget.title + ' (B탭이 고침)');
+    await a.until(`/다른 탭\\(창\\)에서도 이 글을 고치고 있습니다/.test(document.getElementById('draftBarText').textContent)`, 'A탭의 다른 탭 알림');
+    assert.strictEqual(await a.fieldValue('title'), tabTarget.title + ' (A탭)', '알림만 하고 A탭 내용은 바꾸지 않아야 함');
+    await a.click('#loadOtherTabBtn');
+    assert.strictEqual(await a.fieldValue('title'), tabTarget.title + ' (B탭이 고침)');
+    await b.closeTab();
+    await a.close();
+  });
+
+  await step('[미리보기] 탭에 편집 중인 글이 실제 페이지 모양으로 뜬다', async () => {
+    const b = await openBrowser(files);
+    await b.ready();
+    await b.loadPost(editTarget);
+    await b.field('title', '미리보기 확인용 제목');
+    await b.until(`(document.getElementById('previewFrame').getAttribute('srcdoc') || '').includes('미리보기 확인용 제목')`, '미리보기 갱신');
+    const doc = await b.eval(`document.getElementById('previewFrame').getAttribute('srcdoc')`);
+    assert.ok(doc.includes('<base href="https://raw.githubusercontent.com/' + C.SITE.github.owner + '/' + C.SITE.github.repo + '/'), '사진을 저장소에서 읽는 기준 주소가 있어야 함');
+    assert.ok(doc.includes('class="article-body'));
     await b.close();
   });
 
