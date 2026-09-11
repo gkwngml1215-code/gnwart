@@ -11,10 +11,9 @@
 > | 폴더 | `hoo-jeonju-landing` | `hoo-gangnam-landing` |
 > | GitHub 저장소 | `jjwart` | **`gnwart`** |
 > | 도메인 | jjhoowart.co.kr | **gnhoowart.co.kr** |
-> | 어드민 | hoo-admin.pages.dev | **hoo-gangnam-admin.pages.dev** |
+> | 관리 도구 (v2.0) | `jjwart` 저장소 `admin` 브랜치 | **`gnwart` 저장소 `admin` 브랜치** (`hoo-gangnam-admin` 폴더) |
 >
 > 저장소가 다르므로 이 폴더에서 무엇을 하든 전주점 홈페이지는 영향을 받지 않습니다.
-> **「사이트에-올리기.bat」에는 전주점 저장소로 잘못 올라가는 것을 막는 안전장치가 들어 있습니다.**
 
 ---
 
@@ -49,16 +48,17 @@
 
 `index.html` 맨 위에 주석 처리해 뒀습니다.
 네이버 서치어드바이저 · 구글 서치콘솔에서 **강남점 도메인으로** 새로 발급받아 채워주세요.
-어드민의 **1. 기본 SEO** 탭에도 입력란이 있습니다.
+관리 도구의 **1. 기본 SEO** 탭에도 입력란이 있습니다.
 
 > ❗ 전주점 코드를 그대로 쓰면 강남 사이트가 전주점으로 잡힙니다.
 
-### ⬜ 5. 어드민 설치
+### ⬜ 5. 관리 도구 v2.0 설치
 
-옆 폴더 `hoo-gangnam-admin` 을 Cloudflare Pages에 **새 프로젝트로** 올리면 됩니다.
+관리 도구는 `gnwart` 저장소의 **`admin` 브랜치**에 있고 (내 PC: 옆 폴더 `hoo-gangnam-admin`),
+Cloudflare Pages에 **GitHub 연결(Connect to Git)** 로 새 프로젝트를 만들어 올립니다.
 순서는 그 폴더의 `어드민-설치-순서.md` 를 보세요.
 
-> ⚠️ 기존 `hoo-admin` 프로젝트를 고르면 전주점 어드민이 덮어써집니다.
+> ⚠️ 전주점 프로젝트(`hoo-admin`, `jjwart-admin`)를 고르거나 지우지 않도록 이름을 꼭 확인하세요.
 
 ---
 
@@ -70,6 +70,7 @@
 - **치료 방식** — 사율침 / 줌 핸드피스 CO2레이저(코트라 플러스) / 엔디야그 레이저 3종
 - **비용** — 얼굴·목 3단계(99,000~330,000원) / 바디 3단계(149,000~440,000원) + 초과분 단가
 - **전후사진** — 전주점과 동일한 이미지·문구 사용
+- **원장 컬럼** — 7편 (v1 관리 도구 덮어쓰기로 사라졌던 3편 복원 완료)
 
 > 전후사진 제목은 `후한의원 치료 전후 사진` 으로 두었습니다.
 > 전주점에서 촬영된 사례라 `강남점` 으로 한정하지 않았습니다.
@@ -99,7 +100,7 @@
 
 ## VS Code에서 열기
 
-1. `hoo-gangnam-landing.code-workspace` 파일을 더블클릭하면 랜딩페이지 + 어드민 폴더가 같이 열립니다.
+1. `hoo-gangnam-landing.code-workspace` 파일을 더블클릭하면 랜딩페이지 + 관리 도구 폴더가 같이 열립니다.
 2. 확장 프로그램에서 **Live Server** 설치 (Ritwick Dey 제작)
 3. `index.html` 우클릭 → **Open with Live Server**
 
@@ -111,18 +112,46 @@
 hoo-gangnam-landing/
 ├─ index.html              # 랜딩페이지 전체
 ├─ columns.html            # 원장 컬럼 목록
-├─ columns/                # 개별 컬럼 (독립 URL = SEO/GEO 단위)
-│  ├─ column-01.html ~ column-04.html
+├─ columns/                # 원장 컬럼 (독립 URL = SEO/GEO 단위)
+│  ├─ index.json             # 컬럼 목록 원본 — 관리 도구가 발행할 때 이 파일 기준으로 병합
+│  ├─ data/column-XX.json    # 글마다 편집용 원본 값
+│  └─ column-XX.html         # 실제 글 페이지
 ├─ assets/images/          # 이미지 (자리표시 → 실제 사진으로 교체 필요)
 ├─ CNAME                   # 연결된 도메인 (gnhoowart.co.kr)
 ├─ robots.txt              # AI 크롤러 허용 설정
 ├─ llms.txt                # 생성형 AI용 사이트 요약
 ├─ sitemap.xml
-└─ 사이트에-올리기.bat      # 원클릭 업로드 (전주점 저장소 차단 장치 포함)
+└─ 사이트에-올리기.bat      # 예전(v1) 방식용 — 지금은 쓰지 않음 (전주점 저장소 차단 장치 포함)
 ```
 
-어드민은 이 폴더에 없습니다. 옆의 **`hoo-gangnam-admin`** 폴더에 따로 있습니다.
-설치 방법은 그 폴더의 `어드민-설치-순서.md` 를 보세요.
+관리 도구는 이 폴더에 없습니다. 옆의 **`hoo-gangnam-admin`** 폴더(= `gnwart` 저장소 `admin` 브랜치)에 있습니다.
+
+---
+
+## 원장 컬럼 발행 방식 (관리 도구 v2.0)
+
+관리 도구는 발행할 때마다 이 저장소의 `columns/index.json`(컬럼 목록 원본)을 먼저 읽고,
+**지금 쓰는 글 1개만** 파일명(slug) 기준으로 추가·수정한 뒤 나머지 글은 그대로 둡니다.
+발행 전에 "발행 후 몇 개, 추가·수정·유지·삭제" 확인 화면을 보여주고, 바뀌는 파일은 커밋 1개로 한꺼번에 올립니다.
+
+| 파일 | 발행할 때 바뀌는 부분 |
+|---|---|
+| `columns/index.json` | 해당 글 항목만 추가·수정 (삭제는 [삭제]를 눌렀을 때만) |
+| `columns/data/<파일명>.json`, `columns/<파일명>.html` | 해당 글 파일만 |
+| `columns.html` | `COLUMNS:START` ~ `COLUMNS:END` 사이 카드 목록만 |
+| `sitemap.xml` | 컬럼 주소만 (홈 등 다른 주소는 그대로) |
+| `llms.txt` | `## 원장 컬럼` 구역의 컬럼 줄만 |
+
+> - `columns.html`의 `COLUMNS:START` / `COLUMNS:END` 주석은 자동 갱신 표식이니 지우지 마세요.
+> - 컬럼을 **손으로** 추가·삭제할 때는 `columns/index.json`도 같이 고쳐야 합니다. (관리 도구를 쓰면 자동)
+> - 컬럼 백업은 `★홈페이지 제작\컬럼 백업\컬럼-백업하기.bat` 로 합니다 (지점·발행일별 폴더에 저장).
+
+### 버전
+
+| 태그 | 내용 |
+|---|---|
+| `v1.0` | 관리 도구 v1의 덮어쓰기로 사라졌던 컬럼 3편을 복원한 상태 (컬럼 7편) |
+| `v2.0` | 컬럼 목록 원본(`columns/index.json`, `columns/data/`) 도입 — 관리 도구 v2.0과 함께 사용 |
 
 ---
 
@@ -133,10 +162,9 @@ hoo-gangnam-landing/
 
 - `CNAME`
 - `index.html` (canonical / og:url / og:image / twitter:image / JSON-LD)
-- `columns.html`, `columns/*.html`
+- `columns.html`, `columns/*.html`, `columns/index.json`
 - `llms.txt`, `robots.txt`, `sitemap.xml`
-- `사이트에-올리기.bat` (완료 메시지)
-- 어드민의 **1. 기본 SEO → 사이트 도메인** 칸
+- 관리 도구 `columns-core.js` 의 `SITE.domain`, 그리고 **1. 기본 SEO → 사이트 도메인** 칸
 
 ---
 
@@ -144,5 +172,5 @@ hoo-gangnam-landing/
 
 - 전후사진 아래 고지 문구("개인에 따라 시술 효과는 차이가...")는 **의료법상 필수**입니다. 삭제하지 마세요.
 - 각 컬럼 하단의 고지 문구("본 컬럼은 일반적인 의학 정보 제공을 목적으로...")도 삭제하지 마세요.
-- 현재 들어있는 컬럼 4개는 전주점 원고를 강남점 기준으로 바꾼 것입니다.
+- `column-01`~`03`은 전주점 원고를 강남점 기준으로 바꾼 예시 원고입니다.
   게시 전 **원장님 감수**를 거쳐 주세요.

@@ -31,8 +31,14 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://gnhoowart.co.kr/columns/column-04.html</loc>
-    <lastmod>2026-09-11</lastmod>
+    <loc>https://gnhoowart.co.kr/columns/column-06.html</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gnhoowart.co.kr/columns/column-07.html</loc>
+    <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -43,14 +49,8 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://gnhoowart.co.kr/columns/column-06.html</loc>
-    <lastmod>2026-09-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://gnhoowart.co.kr/columns/column-07.html</loc>
-    <lastmod>2026-09-09</lastmod>
+    <loc>https://gnhoowart.co.kr/columns/column-04.html</loc>
+    <lastmod>2026-09-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
