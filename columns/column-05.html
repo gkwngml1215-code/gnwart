@@ -67,6 +67,30 @@
   .article-body figure img { width: 100%; height: auto; border-radius: 1rem; box-shadow: 0 12px 32px rgba(13,13,13,0.08); display: block; }
   .article-body figcaption { margin-top: 0.7rem; font-size: 0.8125rem; color: #8a8a8a; line-height: 1.6; text-align: center; }
   .article-body > img { width: 100%; height: auto; border-radius: 1rem; margin: 2.25rem 0; display: block; }
+  .article-body ol { margin: 1rem 0 1.5rem; padding-left: 1.2rem; list-style: decimal; color: #5b5b5b; line-height: 1.9; }
+  .article-body table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2rem; font-size: 0.9rem; }
+  .article-body caption { caption-side: top; text-align: left; font-weight: 700; color: #0d0d0d; padding-bottom: 0.6rem; }
+  .article-body th, .article-body td { border: 1px solid #d9d9d9; padding: 0.65rem 0.75rem; text-align: left; vertical-align: top; line-height: 1.6; }
+  .article-body th { background: #eeece5; color: #0d0d0d; font-weight: 700; }
+  .article-body td { color: #5b5b5b; }
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .geo-answer, .geo-toc { margin-top: 2rem; border: 1px solid #d9d9d9; border-radius: 1rem; padding: 1.25rem 1.5rem; background: #faf9f6; }
+  .geo-answer ul { list-style: disc; padding-left: 1.1rem; color: #242522; line-height: 1.8; }
+  .geo-toc ol { list-style: decimal; padding-left: 1.2rem; color: #5b5b5b; line-height: 1.9; font-size: 0.9rem; }
+  .geo-toc a:hover { color: #b79e6c; }
+  .geo-answer-label, .geo-reviewer-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; color: #b79e6c; margin-bottom: 0.5rem; }
+  .geo-refs h2, .geo-faq h2 { font-size: 1.25rem; font-weight: 800; margin-top: 3rem; margin-bottom: 0.75rem; }
+  .geo-refs ol { list-style: decimal; padding-left: 1.2rem; color: #5b5b5b; line-height: 1.9; font-size: 0.9rem; }
+  .geo-refs a { text-decoration: underline; text-underline-offset: 3px; word-break: break-all; }
+  .geo-faq .faq-item { border-bottom: 1px solid #d9d9d9; padding: 1rem 0; }
+  .geo-faq summary { font-weight: 700; cursor: pointer; line-height: 1.6; }
+  .geo-faq .faq-item p { margin-top: 0.6rem; color: #5b5b5b; line-height: 1.85; }
+  .geo-reviewer { margin-top: 3rem; display: flex; gap: 1.25rem; align-items: flex-start; border: 1px solid #d9d9d9; border-radius: 1rem; padding: 1.5rem; }
+  .geo-reviewer img { width: 88px; height: 88px; border-radius: 9999px; object-fit: cover; object-position: top; flex-shrink: 0; }
+  .geo-reviewer-name { font-weight: 800; }
+  .geo-reviewer-name span { font-weight: 500; color: #5b5b5b; font-size: 0.875rem; }
+  .geo-reviewer-bio, .geo-reviewer-note { margin-top: 0.4rem; font-size: 0.875rem; color: #5b5b5b; line-height: 1.7; }
+  .geo-modified { margin-top: 1.25rem; font-size: 0.875rem; color: #5b5b5b; text-align: right; }
 </style>
 
 <script type="application/ld+json">
@@ -85,6 +109,7 @@
       ],
       "datePublished": "2026-09-10",
       "dateModified": "2026-09-10",
+      "lastReviewed": "2026-09-10",
       "inLanguage": "ko",
       "about": {
         "@type": "MedicalCondition",
@@ -93,6 +118,18 @@
       "author": {
         "@type": "Physician",
         "name": "홍진우",
+        "jobTitle": "대표원장",
+        "medicalSpecialty": "한의학",
+        "affiliation": {
+          "@type": "MedicalClinic",
+          "name": "후한의원 강남점"
+        }
+      },
+      "reviewedBy": {
+        "@type": "Physician",
+        "name": "홍진우",
+        "jobTitle": "대표원장",
+        "medicalSpecialty": "한의학",
         "affiliation": {
           "@type": "MedicalClinic",
           "name": "후한의원 강남점"
@@ -210,35 +247,47 @@
 
     <p class="eyebrow text-gold text-sm font-bold">편평사마귀</p>
     <h1 class="mt-2 text-2xl md:text-4xl font-extrabold leading-tight">강남편평사마귀치료, 코트라 CO2레이저 vs 일반 CO2레이저 차이 | 후한의원 강남점</h1>
-    <p class="mt-4 text-sm text-muted">2026-09-10 · 후한의원 강남점 홍진우 대표원장</p>
+    <p class="mt-4 text-sm text-muted">작성 <time datetime="2026-09-10">2026-09-10</time> · 후한의원 강남점 홍진우 대표원장</p>
 
     <img src="../assets/images/doctor-hong.jpg" alt="강남편평사마귀치료, 코트라 CO2레이저 vs 일반 CO2레이저 차이 | 후한의원 강남점" class="w-full rounded-2xl shadow-soft object-cover object-top aspect-[16/9] mt-8">
 
+    <nav class="geo-toc" aria-label="목차">
+      <p class="geo-answer-label">이 글에서 답하는 질문</p>
+      <ol>
+        <li><a href="#q1">CO2 레이저의 기본 원리</a></li>
+        <li><a href="#q2">코트라(CORTRA) 방식의 차이</a></li>
+        <li><a href="#q3">시술 정밀도의 차이</a></li>
+        <li><a href="#q4">치료 후 회복 속도</a></li>
+        <li><a href="#q5">어떤 장비를 쓰는지 확인해보세요</a></li>
+      </ol>
+    </nav>
+
     <div class="article-body mt-10">
+<!-- body:start -->
 <p>안녕하세요.<br>
 후한의원 강남점 홍진우 대표원장입니다.</p>
 <p>강남편평사마귀치료를 알아보시는 분들이라면 "코트라 레이저"라는 용어를 한 번쯤 들어보셨을 겁니다.<br>
 일반 CO2레이저와 무엇이 다른지 정리해드리겠습니다.</p>
-<h2>CO2 레이저의 기본 원리</h2>
+<h2 id="q1">CO2 레이저의 기본 원리</h2>
 
 <figure>
-  <img src="../assets/images/2.jpg" alt="강남편평사마귀레이저치료를 하는 모습 " loading="lazy" decoding="async">
+  <img src="../assets/images/2.jpg" alt="강남편평사마귀레이저치료를 하는 모습" loading="lazy" decoding="async">
 </figure>
 <p>CO2 레이저는 이산화탄소 가스를 매질로 하여 조직의 수분에 흡수되는 파장의 빛을 조사해 조직을 정밀하게 태워 제거하는 방식입니다.<br>
 강남편평사마귀치료에서 오랫동안 표준으로 사용되어 온 방법입니다.</p>
-<h2>코트라(CORTRA) 방식의 차이</h2>
+<h2 id="q2">코트라(CORTRA) 방식의 차이</h2>
 
 <figure>
-  <img src="../assets/images/2-1.jpg" alt="강남편평사마귀치료 코트라 co2레이저 치료 " loading="lazy" decoding="async">
+  <img src="../assets/images/2-1.jpg" alt="강남편평사마귀치료 코트라 co2레이저 치료" loading="lazy" decoding="async">
 </figure>
 <p>코트라 방식은 CO2 레이저를 초고속으로 스캐닝하며 조사하는 최신 장비 방식으로, 열 손상을 주변 조직으로 확산시키지 않고 원하는 부위에만 정밀하게 집중시키는 것이 특징입니다.<br>
 일반 CO2레이저보다 주변 정상 조직으로 열이 퍼지는 범위가 좁아, 색소침착이나 흉터 발생 위험을 낮추는 데 유리하다고 알려져 있습니다.</p>
-<h2>시술 정밀도의 차이</h2>
+<h2 id="q3">시술 정밀도의 차이</h2>
 <p>일반 CO2레이저는 수동으로 조사하는 방식이라 시술자의 숙련도에 따라 결과 편차가 있을 수 있는 반면, 코트라 방식은 스캐너를 통해 균일한 깊이와 패턴으로 조사되어 결과의 일관성이 높은 편입니다.<br>
 특히 눈가나 입가처럼 예민한 부위에 병변이 밀집된 경우, 정밀한 조사가 가능한 방식일수록 흉터 위험을 줄이는 데 도움이 됩니다.</p>
-<h2>치료 후 회복 속도</h2>
+<h2 id="q4">치료 후 회복 속도</h2>
 <p>주변 조직 손상이 적을수록 회복 속도도 빠른 경향이 있어, 코트라 방식으로 강남편평사마귀치료를 받으신 분들이 상대적으로 짧은 재생 기간을 경험하는 경우가 많습니다.</p>
-<h2>어떤 장비를 쓰는지 확인해보세요</h2>
+<h2 id="q5">어떤 장비를 쓰는지 확인해보세요</h2>
 <p>강남편평사마귀치료를 찾으실 때는 단순히 CO2 레이저를 사용하는지가 아니라, 어떤 방식의 CO2 레이저를 사용하는지도 함께 확인해보시는 것을 권해드립니다.<br>
 후한의원 강남점에서는 코트라 CO2레이저와 침 치료를 함께 병행하며 강남편평사마귀치료의 흉터 위험을 최소화하는 방향으로 치료를 진행하고 있습니다.</p>
 <ul>
@@ -248,7 +297,19 @@
 <li>#CO2레이저</li>
 <li>#흉터최소화</li>
 </ul>
+<!-- body:end -->
     </div>
+
+      <aside class="geo-reviewer" aria-label="감수 원장">
+        <img src="../assets/images/doctor-hong.jpg" alt="후한의원 강남점 홍진우 대표원장" width="88" height="88" loading="lazy">
+        <div>
+          <p class="geo-reviewer-label">감수 원장</p>
+          <p class="geo-reviewer-name">홍진우 대표원장 <span>(한의사)</span></p>
+          <p class="geo-reviewer-bio">대전대학교 한의과대학 졸업 · 대한 한방피부과학회 정회원 · 대한 트랜스테라피 연구회 정회원 · 現 전국 후한의원 네트워크 대표</p>
+          <p class="geo-reviewer-note">이 글은 후한의원 강남점 홍진우 대표원장이 진료 경험과 아래 참고자료를 바탕으로 작성·감수했습니다.</p>
+        </div>
+      </aside>
+      <p class="geo-modified">최종 수정일 <time datetime="2026-09-10">2026년 9월 10일</time></p>
 
     <p class="mt-10 text-xs text-muted leading-relaxed border-t border-line pt-6">
       본 컬럼은 일반적인 의학 정보 제공을 목적으로 작성되었으며, 특정 치료 효과를 보장하지 않습니다.
@@ -266,10 +327,10 @@
 <section class="py-24 bg-point text-white text-center">
   <div class="max-w-3xl mx-auto px-6">
     <p class="eyebrow text-gold text-sm font-bold">HOO KOREAN MEDICAL CLINIC</p>
-    <h2 class="mt-4 text-xl md:text-2xl font-bold leading-relaxed">
+    <p class="mt-4 text-xl md:text-2xl font-bold leading-relaxed">
       " 궁금한 점이 있다면 편하게 물어보세요.<br>
       상담은 진단부터 시작합니다. "
-    </h2>
+    </p>
     <a href="tel:02-543-9696" class="inline-block mt-8 rounded-full bg-gold text-point font-bold px-8 py-3.5">지금 전화 상담하기</a>
   </div>
 </section>
