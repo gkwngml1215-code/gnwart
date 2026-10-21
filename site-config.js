@@ -27,6 +27,14 @@
     github: { owner: 'gkwngml1215-code', repo: 'gnwart', branch: 'main' },
     tokenKey: 'hoo-gangnam-admin-gh-token',
     storagePrefix: 'hoogangnam',
+    // 컬럼 하단 "감수 원장" 박스 · 구조화 데이터(reviewedBy)에 쓰는 값
+    reviewer: {
+      name: '홍진우', title: '대표원장', license: '한의사',
+      photo: 'assets/images/doctor-hong.jpg',
+      bio: '대전대학교 한의과대학 졸업 · 대한 한방피부과학회 정회원 · 대한 트랜스테라피 연구회 정회원 · 現 전국 후한의원 네트워크 대표',
+    },
+    // GEO 작성원칙: 참고자료 3개에 반드시 들어가야 하는 출처 (발행 전 검사)
+    referenceSources: ['대한피부과학회', 'DermNet', 'NHS'],
   };
 
   // 1~7번 SEO 설정 기본값 (이 브라우저에 저장된 값이 없을 때 쓰임)
