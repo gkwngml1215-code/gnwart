@@ -3,6 +3,15 @@
   "about": "원장 컬럼 목록의 원본입니다. 관리 도구가 발행할 때 이 파일을 먼저 읽고 파일명(slug) 기준으로 병합합니다. 직접 고칠 때는 다른 글이 빠지지 않게 주의하세요.",
   "columns": [
     {
+      "slug": "syringoma-under-eye-difference",
+      "title": "강남 눈 밑 한관종, 편평사마귀·비립종과 어떻게 다를까요?",
+      "category": "감별 진단",
+      "cardSummary": "눈 밑에 오돌토돌 올라온 살구색 돌기, 한관종일까요? 편평사마귀·비립종과 다른 점과 후한의원 강남점의 사율침·CO2레이저·엔디야그 복합치료 방식을 정리했습니다.",
+      "image": "assets/images/doctor-hong.jpg",
+      "datePublished": "2026-10-22",
+      "dateModified": "2026-10-22"
+    },
+    {
       "slug": "column-10",
       "title": "강남후한의원 칼럼｜편평사마귀 색깔로 보는 진행 단계",
       "category": "편평사마귀",
