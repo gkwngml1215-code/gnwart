@@ -3,6 +3,15 @@
   "about": "원장 컬럼 목록의 원본입니다. 관리 도구가 발행할 때 이 파일을 먼저 읽고 파일명(slug) 기준으로 병합합니다. 직접 고칠 때는 다른 글이 빠지지 않게 주의하세요.",
   "columns": [
     {
+      "slug": "mole-removal-aftercare",
+      "title": "강남 점 제거 후, 상처와 색소는 어떻게 관리해야 할까요?",
+      "category": "치료 후 관리",
+      "cardSummary": "점을 뺀 자리는 딱지가 떨어진 뒤에도 붉은 기와 색 변화가 한동안 이어질 수 있습니다. 깊이에 따른 회복 차이, 첫 며칠의 상처 보호, 자외선 차단, 엔디야그 재생 관리까지 단계별로 정리했습니다.",
+      "image": "assets/images/doctor-hong.jpg",
+      "datePublished": "2026-10-23",
+      "dateModified": "2026-10-23"
+    },
+    {
       "slug": "syringoma-under-eye-difference",
       "title": "강남 눈 밑 한관종, 편평사마귀·비립종과 어떻게 다를까요?",
       "category": "감별 진단",
