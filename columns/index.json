@@ -3,6 +3,15 @@
   "about": "원장 컬럼 목록의 원본입니다. 관리 도구가 발행할 때 이 파일을 먼저 읽고 파일명(slug) 기준으로 병합합니다. 직접 고칠 때는 다른 글이 빠지지 않게 주의하세요.",
   "columns": [
     {
+      "slug": "skin-tag-neck-armpit",
+      "title": "강남 목·겨드랑이 쥐젖, 왜 생기고 어떻게 제거하나요?",
+      "category": "감별 진단",
+      "cardSummary": "목과 겨드랑이에 매달리듯 붙은 작은 살점, 쥐젖은 피부가 접히고 쓸리는 자리에 잘 생기는 양성 돌기입니다. 편평사마귀와 구분하는 법, 집에서 떼면 안 되는 이유, 진료실 제거와 제거 후 관리를 정리했습니다.",
+      "image": "assets/images/doctor-hong.jpg",
+      "datePublished": "2026-10-24",
+      "dateModified": "2026-10-24"
+    },
+    {
       "slug": "mole-removal-aftercare",
       "title": "강남 점 제거 후, 상처와 색소는 어떻게 관리해야 할까요?",
       "category": "치료 후 관리",
