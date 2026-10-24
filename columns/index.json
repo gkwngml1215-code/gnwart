@@ -3,6 +3,15 @@
   "about": "원장 컬럼 목록의 원본입니다. 관리 도구가 발행할 때 이 파일을 먼저 읽고 파일명(slug) 기준으로 병합합니다. 직접 고칠 때는 다른 글이 빠지지 않게 주의하세요.",
   "columns": [
     {
+      "slug": "flat-wart-vs-acne-forehead-jawline",
+      "title": "강남 이마·턱선 편평사마귀, 좁쌀여드름과 어떻게 구분하나요?",
+      "category": "감별 진단",
+      "cardSummary": "이마와 턱선에 오돌토돌 올라온 돌기, 여드름인 줄 알고 짜다가 오히려 늘어나는 경우가 있습니다. 편평사마귀와 좁쌀여드름을 나눠 보는 기준, 짜거나 뜯으면 안 되는 이유, 구분 후 관리법을 정리했습니다.",
+      "image": "assets/images/doctor-hong.jpg",
+      "datePublished": "2026-10-25",
+      "dateModified": "2026-10-25"
+    },
+    {
       "slug": "skin-tag-neck-armpit",
       "title": "강남 목·겨드랑이 쥐젖, 왜 생기고 어떻게 제거하나요?",
       "category": "감별 진단",
