@@ -3,6 +3,15 @@
   "about": "원장 컬럼 목록의 원본입니다. 관리 도구가 발행할 때 이 파일을 먼저 읽고 파일명(slug) 기준으로 병합합니다. 직접 고칠 때는 다른 글이 빠지지 않게 주의하세요.",
   "columns": [
     {
+      "slug": "seborrheic-keratosis-vs-flat-wart",
+      "title": "강남 얼굴의 갈색 납작한 돌기, 검버섯과 편평사마귀는 어떻게 구분하나요?",
+      "category": "감별 진단",
+      "cardSummary": "얼굴에 생긴 갈색 납작한 돌기, 나이 때문에 생긴 검버섯인지 번질 수 있는 편평사마귀인지 헷갈리는 분이 많습니다. 원인·생김새·배열로 나눠 보는 기준과 구분 후 관리 방향을 정리했습니다.",
+      "image": "assets/images/doctor-hong.jpg",
+      "datePublished": "2026-10-26",
+      "dateModified": "2026-10-26"
+    },
+    {
       "slug": "flat-wart-vs-acne-forehead-jawline",
       "title": "강남 이마·턱선 편평사마귀, 좁쌀여드름과 어떻게 구분하나요?",
       "category": "감별 진단",
