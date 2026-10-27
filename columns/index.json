@@ -3,6 +3,15 @@
   "about": "원장 컬럼 목록의 원본입니다. 관리 도구가 발행할 때 이 파일을 먼저 읽고 파일명(slug) 기준으로 병합합니다. 직접 고칠 때는 다른 글이 빠지지 않게 주의하세요.",
   "columns": [
     {
+      "slug": "milia-around-eyes-removal-care",
+      "title": "강남 눈가 비립종, 왜 생기고 어떻게 제거·관리하나요?",
+      "category": "감별 진단",
+      "cardSummary": "눈 밑과 눈꼬리에 박힌 하얀 알갱이, 비립종은 얇은 눈가 피부에 각질이 갇혀 생깁니다. 눈가에 잘 생기는 이유, 집에서 짜면 안 되는 까닭, 진료실 제거와 시기별 관리 요령을 정리했습니다.",
+      "image": "assets/images/doctor-hong.jpg",
+      "datePublished": "2026-10-28",
+      "dateModified": "2026-10-28"
+    },
+    {
       "slug": "flat-wart-recurrence-after-removal",
       "title": "강남 편평사마귀, 제거한 뒤에도 왜 다시 생기고 언제 재진해야 할까요?",
       "category": "치료 후 관리",
