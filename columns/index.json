@@ -3,6 +3,15 @@
   "about": "원장 컬럼 목록의 원본입니다. 관리 도구가 발행할 때 이 파일을 먼저 읽고 파일명(slug) 기준으로 병합합니다. 직접 고칠 때는 다른 글이 빠지지 않게 주의하세요.",
   "columns": [
     {
+      "slug": "flat-wart-shared-towel-razor-makeup-spread",
+      "title": "강남 편평사마귀, 가족·연인끼리 수건·면도기·화장도구로 옮을 수 있나요?",
+      "category": "편평사마귀",
+      "cardSummary": "가족이나 연인 얼굴에 편평사마귀가 생기면 함께 쓰던 수건과 면도기, 화장도구부터 걱정됩니다. 생활 속에서 바이러스가 옮겨 가는 경로, 물건별 관리 요령, 가족이 함께 지킬 예방 습관을 정리했습니다.",
+      "image": "assets/images/doctor-hong.jpg",
+      "datePublished": "2026-11-02",
+      "dateModified": "2026-11-02"
+    },
+    {
       "slug": "kids-teen-flat-wart-school-care",
       "title": "강남 아이 얼굴 편평사마귀, 왜 생기고 학교·학원 생활에서는 어떻게 관리하나요?",
       "category": "편평사마귀",
