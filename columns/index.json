@@ -3,6 +3,15 @@
   "about": "원장 컬럼 목록의 원본입니다. 관리 도구가 발행할 때 이 파일을 먼저 읽고 파일명(slug) 기준으로 병합합니다. 직접 고칠 때는 다른 글이 빠지지 않게 주의하세요.",
   "columns": [
     {
+      "slug": "hairline-forehead-flat-wart-bangs-hat-hair-products",
+      "title": "강남 이마·헤어라인 편평사마귀, 앞머리·모자·헤어 제품이 번짐에 영향을 줄까요?",
+      "category": "편평사마귀",
+      "cardSummary": "머리카락이 시작되는 이마 경계에 납작한 돌기가 늘었다면 편평사마귀일 수 있습니다. 앞머리·모자·헤어 제품·드라이 습관이 번짐과 어떤 관계가 있는지, 여드름·모낭염과의 구분, 치료와 관리를 정리했습니다.",
+      "image": "assets/images/doctor-hong.jpg",
+      "datePublished": "2026-11-09",
+      "dateModified": "2026-11-09"
+    },
+    {
       "slug": "hand-finger-flat-wart-hangnail-dryness-care",
       "title": "강남 손등·손가락 편평사마귀, 왜 손에 생기고 어떻게 관리·치료하나요?",
       "category": "편평사마귀",
