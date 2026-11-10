@@ -3,6 +3,15 @@
   "about": "원장 컬럼 목록의 원본입니다. 관리 도구가 발행할 때 이 파일을 먼저 읽고 파일명(slug) 기준으로 병합합니다. 직접 고칠 때는 다른 글이 빠지지 않게 주의하세요.",
   "columns": [
     {
+      "slug": "flat-wart-exercise-sweat-gym-sauna",
+      "title": "강남 편평사마귀, 운동하며 흘린 땀과 헬스장 수건이 번짐에 영향을 줄까요?",
+      "category": "편평사마귀",
+      "cardSummary": "헬스장·필라테스·사우나에서 흘린 땀, 공용 수건과 운동기구, 땀을 닦는 마찰이 편평사마귀 번짐과 어떤 관련이 있는지, 치료 기간 중 운동은 어떻게 조절하는지 정리했습니다.",
+      "image": "assets/images/doctor-hong.jpg",
+      "datePublished": "2026-11-11",
+      "dateModified": "2026-11-11"
+    },
+    {
       "slug": "hairline-forehead-flat-wart-bangs-hat-hair-products",
       "title": "강남 이마·헤어라인 편평사마귀, 앞머리·모자·헤어 제품이 번짐에 영향을 줄까요?",
       "category": "편평사마귀",
