@@ -3,6 +3,15 @@
   "about": "원장 컬럼 목록의 원본입니다. 관리 도구가 발행할 때 이 파일을 먼저 읽고 파일명(slug) 기준으로 병합합니다. 직접 고칠 때는 다른 글이 빠지지 않게 주의하세요.",
   "columns": [
     {
+      "slug": "beard-jaw-flat-wart-shaving-habits",
+      "title": "강남 턱·입가 편평사마귀, 면도할 때마다 수염 자리를 따라 번질까요?",
+      "category": "편평사마귀",
+      "cardSummary": "턱·입가·구레나룻 수염 부위에 생긴 편평사마귀가 면도날·전기면도기·수염 뽑기 습관과 어떤 관련이 있는지, 면도 방법을 어떻게 바꾸고 치료 기간 중 면도는 어떻게 하는지 정리했습니다.",
+      "image": "assets/images/doctor-hong.jpg",
+      "datePublished": "2026-11-13",
+      "dateModified": "2026-11-13"
+    },
+    {
       "slug": "flat-wart-exercise-sweat-gym-sauna",
       "title": "강남 편평사마귀, 운동하며 흘린 땀과 헬스장 수건이 번짐에 영향을 줄까요?",
       "category": "편평사마귀",
