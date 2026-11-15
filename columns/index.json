@@ -3,6 +3,15 @@
   "about": "원장 컬럼 목록의 원본입니다. 관리 도구가 발행할 때 이 파일을 먼저 읽고 파일명(slug) 기준으로 병합합니다. 직접 고칠 때는 다른 글이 빠지지 않게 주의하세요.",
   "columns": [
     {
+      "slug": "eyelid-flat-wart-eye-rubbing-makeup-contact-lens",
+      "title": "강남 눈가·눈꺼풀 편평사마귀, 눈을 비비고 화장하는 습관과 관련이 있을까요?",
+      "category": "편평사마귀",
+      "cardSummary": "눈가·눈꺼풀에 생긴 편평사마귀가 눈 비비기, 아이라이너·마스카라 같은 아이메이크업, 콘택트렌즈 습관과 어떤 관련이 있는지, 눈 가까이에서 치료할 때 무엇을 고려하는지 정리했습니다.",
+      "image": "assets/images/doctor-hong.jpg",
+      "datePublished": "2026-11-16",
+      "dateModified": "2026-11-16"
+    },
+    {
       "slug": "beard-jaw-flat-wart-shaving-habits",
       "title": "강남 턱·입가 편평사마귀, 면도할 때마다 수염 자리를 따라 번질까요?",
       "category": "편평사마귀",
