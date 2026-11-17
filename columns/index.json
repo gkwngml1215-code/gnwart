@@ -3,6 +3,15 @@
   "about": "원장 컬럼 목록의 원본입니다. 관리 도구가 발행할 때 이 파일을 먼저 읽고 파일명(slug) 기준으로 병합합니다. 직접 고칠 때는 다른 글이 빠지지 않게 주의하세요.",
   "columns": [
     {
+      "slug": "flat-wart-sun-uv-outdoor-visibility",
+      "title": "강남 편평사마귀, 햇빛 아래 야외활동을 하고 나면 왜 더 도드라져 보일까요?",
+      "category": "편평사마귀",
+      "cardSummary": "골프·등산·휴가처럼 햇빛을 오래 받은 뒤 편평사마귀가 더 눈에 띄는 이유를 주변 피부 색 변화와 자외선, 피부 면역의 관점에서 정리하고, 자외선 차단 습관과 치료 전후 햇빛 관리 요령을 안내합니다.",
+      "image": "assets/images/doctor-hong.jpg",
+      "datePublished": "2026-11-18",
+      "dateModified": "2026-11-18"
+    },
+    {
       "slug": "eyelid-flat-wart-eye-rubbing-makeup-contact-lens",
       "title": "강남 눈가·눈꺼풀 편평사마귀, 눈을 비비고 화장하는 습관과 관련이 있을까요?",
       "category": "편평사마귀",
