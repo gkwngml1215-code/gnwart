@@ -3,6 +3,15 @@
   "about": "원장 컬럼 목록의 원본입니다. 관리 도구가 발행할 때 이 파일을 먼저 읽고 파일명(slug) 기준으로 병합합니다. 직접 고칠 때는 다른 글이 빠지지 않게 주의하세요.",
   "columns": [
     {
+      "slug": "flat-wart-many-lesions-staged-treatment-plan",
+      "title": "강남 편평사마귀가 수십 개로 퍼졌다면, 한 번에 모두 제거하나요 나눠서 진행하나요?",
+      "category": "편평사마귀",
+      "cardSummary": "편평사마귀가 얼굴과 목에 수십 개로 늘어났을 때 한 번에 정리할지, 부위·크기별로 나눌지는 개수·분포·두께를 보고 정합니다. 사율침·CO2레이저·엔디야그 조합과 회차 사이 관리, 새 병변 확인 방법을 정리했습니다.",
+      "image": "assets/images/doctor-hong.jpg",
+      "datePublished": "2026-11-27",
+      "dateModified": "2026-11-27"
+    },
+    {
       "slug": "flat-wart-bathhouse-swimming-pool-soaked-skin",
       "title": "강남 편평사마귀, 수영장·목욕탕에서 물에 오래 불린 피부는 왜 번지기 쉬울까요?",
       "category": "편평사마귀",
